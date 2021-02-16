@@ -7,14 +7,16 @@ class Customer
     public $age;
     public $datetime;
     public $film;
+    public $room;
 
-    public function __construct($prename, $lastname, $age, $datetime, $film) 
+    public function __construct($prename, $lastname, $age, $datetime, $film, $room) 
     {
         $this->prename = $prename;
         $this->lastname = $lastname;
         $this->age = $age;
         $this->datetime = $datetime;
         $this->film = $film;
+        $this->room = $room;
     }
 
     public function register_customer() 
@@ -25,7 +27,7 @@ class Customer
 
         $array = 
         [
-        $test = new Customer($prename, $lastname, $age, "", "")
+        $test = new Customer($prename, $lastname, $age, NULL, NULL, NULL)
         ];
 
         $oldData = file_get_contents('./data/customers.json');
@@ -38,55 +40,77 @@ class Customer
     public function create_booking() 
     {
 
+        $prename = readline("Geben Sie die Vorname Ihrer Kunde ein: \n");
+        $lastname = readline("Geben Sie die Nachname Ihrer Kunde ein: \n");
+        $age = readline("Wie alt ist Ihre Kunde: \n");
+        $datetime = readline("Wann wird Ihre Kunde ein Film schauen kommen (Format: DD.MM.YYYY:HH:MM:SS): \n");
+        $film = readline("Was für einen Film wird Ihre Kunde anschauen: \n");
+        $room = readline("In welcher Halle wird das Film staat finden: \n");
+        
+        
+        
+        
+        $oldData = file_get_contents('./data/customers.json');
+        $tempArray = json_decode($oldData);
+        rsort($tempArray);
+        
+        foreach($tempArray as $results) 
+        {
+            foreach($results as $subResult)
+            {
+                //json object -> php object array -> go into first array -> then go into second array and save ln, pn, ageNum, fm and dt into variables -> then replace this ovbject 
+        
+                    $ln = $subResult->{'lastname'}; //lastname
+                    $pn = $subResult->{'prename'}; //prename
+                    $ageNum = $subResult->{'age'}; //age
+                    $fm = $subResult->{'film'}; //film name
+                    $dt = $subResult->{'datetime'}; // date time
+                    $ro = $subResult->{'room'}; //room number
+        
+                    if($prename == $pn && $lastname == $ln && $ageNum == $age) 
+                    {
+        
+                        if(isset($fm, $dt, $ro)) { // AND isset($dt) != false AND isset($ro) != false) {
+                            printf("%s %s ist schon gebucht (Film: %s, Haale: %s und Zeit: %s)", $prename, $lastname, $fm, $ro, $dt); //TODO: Fix this message
+                            exit();
+                        } else {
+        
+                            $array = 
+                            [
+                            $test = new Customer($prename, $lastname, $age, $datetime, $film, $room)
+                            ];
+        
+                            unset($subResult);
+                            
+                            array_push($tempArray, $array);
+                            $jsonData = json_encode($tempArray);
+                            file_put_contents('./data/customers.json', $jsonData);
+                        }
+                    }
+            }
+        }
+
     }
 }
 
 
 
 // only register user (will later go to administration.php)
+
+/*$register = new Customer("", "", "", "", "", "");
+$register->register_customer();*/
+
+
+//check if customer doesnt already have a booking and then set the film, datetime and room (aka booking)
 /*
-$register = new Customer("", "", "", "", "");
-$register->register_customer();
+$book = new Customer("", "", "", "", "", "");
+$book->create_booking();
 */
 
-//check if customer doesnt already have a booking and then set the film and datetime (aka booking)
-/*
-$prename = readline("Geben Sie die Vorname Ihrer Kunde ein: \n");
-$lastname = readline("Geben Sie die Nachname Ihrer Kunde ein: \n");
-$age = readline("Wie alt ist Ihre Kunde: \n");
-$datetime = readline("Wann wird Ihre Kunde ein Film schauen kommen (Format: DD.MM.YYYY:HH:MM:SS): \n");
-$film = readline("Was für einen Film wird Ihre Kunde anschauen: \n");
-
-
-$array = 
-[
-$test = new Customer("", "", "", $datetime, $film)
-];
-*/
-
-$oldData = file_get_contents('./data/customers.json');
-$tempArray = json_decode($oldData);
-
-foreach($tempArray as $results) 
-{
-    foreach($results as $subResult)
-    {
-
-            $ln = $subResult->{'lastname'}; //lastname
-            $pn = $subResult->{'prename'}; //prename
-            $age = $subResult->{'age'}; //age
-            $dt = $subResult->{'datetime'}; // date time
-            $fm = $subResult->{'film'}; //film name
-    }
-}
-
 /*
 
-array_push($tempArray, $array);
-$jsonData = json_encode($tempArray);
-file_put_contents('./data/customers.json', $jsonData);
 
-
+//TODO: Dont forget to add room num to booking
 
 file get contents
 foreach to get name and age to much with input
