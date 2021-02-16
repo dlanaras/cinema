@@ -69,16 +69,19 @@ $tempArray = json_decode($oldData);
 
 foreach($tempArray as $results) 
 {
-    foreach($results as $subres)
+    foreach($results as $subResult)
     {
-        foreach($subres as $subsub)
-        {
-            print($subsub);
-        }
+
+            $ln = $subResult->{'lastname'}; //lastname
+            $pn = $subResult->{'prename'}; //prename
+            $age = $subResult->{'age'}; //age
+            $dt = $subResult->{'datetime'}; // date time
+            $fm = $subResult->{'film'}; //film name
     }
 }
 
 /*
+
 array_push($tempArray, $array);
 $jsonData = json_encode($tempArray);
 file_put_contents('./data/customers.json', $jsonData);
@@ -90,8 +93,8 @@ foreach to get name and age to much with input
 if it matches with the input and film and datetime arent set -> it fills them with the input given
 
 then use the same or a simular method as seen above to append the data without ruining the JSON format
-*7
 
+*/
 
 
 //use room class to count total seats of room and then substract them by all the customers that have this room on the same time
