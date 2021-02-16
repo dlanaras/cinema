@@ -71,7 +71,7 @@ class Customer
                     {
         
                         if(isset($fm, $dt, $ro)) { // AND isset($dt) != false AND isset($ro) != false) {
-                            printf("%s %s ist schon gebucht (Film: %s, Haale: %s und Zeit: %s)", $prename, $lastname, $fm, $ro, $dt); //TODO: Fix this message
+                            printf("%s %s ist schon gebucht (Film: %s, Haale: %s und Zeit: %s)", $prename, $lastname, $fm, $ro, $dt);
                             exit();
                         } else {
         
@@ -102,23 +102,9 @@ $register->register_customer();*/
 
 
 //check if customer doesnt already have a booking and then set the film, datetime and room (aka booking)
-/*
-$book = new Customer("", "", "", "", "", "");
-$book->create_booking();
-*/
 
-/*
-
-
-//TODO: Dont forget to add room num to booking
-
-file get contents
-foreach to get name and age to much with input
-if it matches with the input and film and datetime arent set -> it fills them with the input given
-
-then use the same or a simular method as seen above to append the data without ruining the JSON format
-
-*/
+/*$book = new Customer("", "", "", "", "", "");
+$book->create_booking();*/
 
 
 //use room class to count total seats of room and then substract them by all the customers that have this room on the same time
