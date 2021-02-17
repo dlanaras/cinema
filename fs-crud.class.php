@@ -76,6 +76,7 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
     {
         //recomended to open cmd twice one to be able to see the list here and the other to select what to delete and what to replace
 
+        $i = 0;
         $directory = "./data/";
         $texts = glob($directory . "FS_*.json");
         echo "Die folgende Dateien sind die schon existierende Film-Pläne.\n";
@@ -103,7 +104,9 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
             echo "Halle: " . $result->{'cinemaRoom'} . "\n";
             echo "Preis: " . $result->{'price'} . "\n";
             echo "Altersfreigabe: " . $result->{'ageRestriction'} . "\n";
+            echo "Index (Um eine Listung zu löschen gebraucht): " . $i . "\n";
             echo "----------------------------------------------------------\n\n";
+            $i++;
         }
     }
     }
@@ -113,6 +116,7 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
     {
         //TODO: use name, room and datetime for the deletion of a whole array
         //This should also be used to remove the fillers
+        readline("Wählen sie die Listung die Sie löschen wollen (Geben Sie die Index davon ein): \n");
     }
 
     public function replace_From_FS() 
@@ -128,6 +132,9 @@ $FScreate->create_FS();
 */
 
 // Used to choose a Film-Schedule and show it's Specifications
-/*$FSshow = new FS_CRUD("","","","","","");
+/*
+$FSshow = new FS_CRUD("","","","","","");
 $FSshow->show_FS();
 */
+
+//add number for deletion and increment it on every foreach loop
