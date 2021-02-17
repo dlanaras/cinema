@@ -116,7 +116,62 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
     {
         //TODO: use name, room and datetime for the deletion of a whole array
         //This should also be used to remove the fillers
-        readline("Wählen sie die Listung die Sie löschen wollen (Geben Sie die Index davon ein): \n");
+        $newArray = [];
+        $directory = "./data/";
+        $texts = glob($directory . "FS_*.json");
+        echo "Die folgende Dateien sind die schon existierende Film-Pläne.\n";
+
+
+        foreach($texts as $text)
+        {
+            echo $text . "\n";
+        }
+
+        $FSDay = readline("\nVordem Sie eine Listung löschen, mussen Sie den Film-Plan auswählen (FS_ '01_01_2000' .json): \n");
+        $filePath = "./data/FS_" . $FSDay .".json";
+        $FSData = file_get_contents($filePath);
+        $FSDecode = json_decode($FSData);
+        echo "Empfehlenswert ist, dass Sie in eine zweite Eingabeaufforderung die Listugen offen haben, denn alle Eingaben genau gleich eingegeben müssen werden. \n";
+        $filmName = readline("Wie heisst der Film: \n");
+        $filmDesc = readline("Geben Sie eine kurze Beschreibung des Filmes: \n");
+        $filmDatetime = readline("Wann findet der Film statt (Format: DD.MM.YYYY:HH:MM:SS): \n");
+        $cinemaRoom = readline("In welcher Halle findet der Film statt: \n");
+        $price = readline("Wie viel Kostet ein Billet für diesen Film (Format: 12.35): \n");
+        $ageRestriction = readline("Was ist die Altersfreigabe für diesen Film: \n");
+        //$toBeDeleted = readline("Wählen sie die Listung, die Sie löschen wollen (Geben Sie die Index davon ein): \n");
+        foreach($FSDecode as $results) 
+        {
+            foreach ($results as $result)
+            {
+
+                //if user input matches foreach loop delete this result
+                if ($filmName == $result->{'filmName'} AND $filmDesc == $result->{'filmDesc'} AND $filmDatetime == $result->{'filmDatetime'} AND $cinemaRoom == $result->{'cinemaRoom'} AND $price == $result->{'price'} AND $ageRestriction == $result->{'ageRestriction'})
+                {
+                    print_r($result);
+                    unset($result);
+                    //echo "here ends first vardump";
+                    //unset($results, $toBeDeleted);
+                    //print_r(array_keys($results));
+                    /*$array = array_diff( $array, array($value) );
+                    return $array;
+                    */
+                } 
+                else
+                {
+                    $handle = fopen($filePath, "a+");
+                    array_push($newArray,  array($result));
+                    $encoded = json_encode($newArray);
+                    //fwrite($handle, $encoded);
+                    file_put_contents($filePath, $encoded);
+                    fclose($handle);
+
+                    //$jsonData = json_encode($tempArray);
+
+                }
+
+            }
+
+        }
     }
 
     public function replace_From_FS() 
@@ -137,4 +192,9 @@ $FSshow = new FS_CRUD("","","","","","");
 $FSshow->show_FS();
 */
 
+// Remove an object from a JSON file
+/*
+$FSRemove = new FS_CRUD("","","","","","");
+$FSRemove->remove_From_FS();
+*/
 //add number for deletion and increment it on every foreach loop
