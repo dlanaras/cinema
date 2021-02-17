@@ -121,11 +121,13 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
     }
 }
 
-// Create a new Film-Schedule for a specific day (NEW: also used to append) TODO: remember that first object should be ignored
+// Create a new Film-Schedule for a specific day (NEW: also used to append)
 /*
 $FScreate = new FS_CRUD("", "", "", "", "", "");
 $FScreate->create_FS();
 */
 
-$FSshow = new FS_CRUD("","","","","","");
+// Used to choose a Film-Schedule and show it's Specifications
+/*$FSshow = new FS_CRUD("","","","","","");
 $FSshow->show_FS();
+*/
