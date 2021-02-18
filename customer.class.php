@@ -156,4 +156,61 @@ class Customer
         $freeSeats = 80 - $same;
         printf("In der Halle: %d am: %s gibt es insgesamt noch: %d freie Plätze", $room, $datetime, $freeSeats);
     }
+
+    public function remove_booking()
+    {
+        $newArray = [];
+        $oldData = file_get_contents('./data/customers.json');
+        $tempArray = json_decode($oldData);
+        echo "Empfehlenswert ist, dass Sie in eine zweite Eingabeaufforderung die Buchungen offen haben, denn alle Eingaben genau gleich eingegeben müssen werden. \n";
+        $datetime = readline("Geben Sie die Datum der Buchung ein (Format: DD.MM.YYYY:HH:MM:SS): \n");
+        $room = readline("Geben Sie die Halle ein: \n");
+        $film = readline("Geben Sie den Film ein: \n");
+        $prename = readline("Geben Sie die Vorname der Kunde ein: \n");
+        $lastname = readline("Geben Sie die Nachname der Kunde ein: \n");
+        $age = readline("Geben Sie die Alter der Kunde ein: \n");
+        $fullDelete = readline("Wollen Sie auch die Registrierung entfernen? (zu entfernen 'ja' eingeben, sonst die Enter-Taste drücken): \n");
+
+        foreach($tempArray as $results) 
+        {
+            foreach ($results as $subResult)
+            {
+                if($fullDelete == "ja")
+                {
+                    if ($subResult->{'prename'} == $prename AND $subResult->{'lastname'} == $lastname AND $subResult->{'age'} == $age)
+                    {
+                        echo "Wenn Sie die folgenden Nachricht 2 Mal sehen können, bedeutet dies, dass Sie die Listung gelöscht haben";
+                        print_r($subResult);
+                        unset($subResult);
+                    } 
+                    else
+                    {
+                        $handle = fopen('./data/customers.json', "a+");
+                        array_push($newArray,  array($subResult));
+                        $encoded = json_encode($newArray);
+                        file_put_contents('./data/customers.json', $encoded);
+                        fclose($handle);
+                    }
+                }
+                else 
+                {
+                    
+                    if ($subResult->{'datetime'} == $datetime AND $subResult->{'film'} == $film AND $subResult->{'room'} == $room AND $subResult->{'prename'} == $prename AND $subResult->{'lastname'} == $lastname AND $subResult->{'age'} == $age)
+                    {
+                        echo "Wenn Sie die folgenden Nachricht sehen können, bedeutet dies, dass Sie die Listung gelöscht haben";
+                        print_r($subResult);
+                        unset($subResult);
+                    } 
+                    else
+                    {
+                        $handle = fopen('./data/customers.json', "a+");
+                        array_push($newArray,  array($subResult));
+                        $encoded = json_encode($newArray);
+                        file_put_contents('./data/customers.json', $encoded);
+                        fclose($handle);
+                    }
+                }
+            }
+        }
+    }
 }
