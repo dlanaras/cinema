@@ -58,7 +58,7 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
             {
                 $filler =
                 array(
-                $fill = new FS_CRUD("first", "JSON", "array", "is", "a", "filler")
+                $fill = new FS_CRUD("If", "you", "see", "this", "delete", "this")
                 );
 
                 $jsonData = json_encode($filler);
