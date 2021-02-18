@@ -1,14 +1,34 @@
 <?php
+//All PHPDoc is automatically generated and is therefore probably incorrect
 
+/**
+ * FS_CRUD
+ */
 class FS_CRUD //Film Schedule - Create Remove Update Delete
-{
+{    
+    /**
+     * filmName
+     *
+     * @var mixed
+     */
     public $filmName;
     public $filmDesc;
     public $filmDatetime;
     public $cinemaRoom;
     public $price;
     public $ageRestriction;
-
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $filmName
+     * @param  mixed $filmDesc
+     * @param  mixed $filmDatetime
+     * @param  mixed $cinemaRoom
+     * @param  mixed $price
+     * @param  mixed $ageRestriction
+     * @return void
+     */
     public function __construct($filmName, $filmDesc, $filmDatetime, $cinemaRoom, $price, $ageRestriction) 
     {
         $this->filmName = $filmName;
@@ -19,7 +39,12 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
         $this->ageRestriction = $ageRestriction;
     }
 
-
+    
+    /**
+     * create_FS
+     *
+     * @return void
+     */
     public function create_FS() 
     {
         //Choose Day for Film-Schedule (Name of Film-Schedule includes day)
@@ -71,7 +96,12 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
     }
 
     // was originally a method for appending, but since the othere method does that i decided to replace it with a method that shows a specific Film-Schedule
-
+    
+    /**
+     * show_FS
+     *
+     * @return void
+     */
     public function show_FS()
     {
         //recomended to open cmd twice one to be able to see the list here and the other to select what to delete and what to replace
@@ -108,7 +138,12 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
     }
     }
 
-
+    
+    /**
+     * remove_From_FS
+     *
+     * @return void
+     */
     public function remove_From_FS()
     {
         //TODO: use name, room and datetime for the deletion of a whole array

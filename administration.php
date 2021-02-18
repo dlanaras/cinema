@@ -1,5 +1,5 @@
 <?php 
-
+//All PHPDoc is automatically generated and is therefore probably incorrect
 //github repo: https://github.com/dlanaras/cinema
 include_once("./customer.class.php");
 include_once("./fs-crud.class.php");

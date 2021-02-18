@@ -1,15 +1,35 @@
 <?php 
 
+//All PHPDoc is automatically generated and is therefore probably incorrect
 
+/**
+ * Customer
+ */
 class Customer
-{
+{    
+    /**
+     * prename
+     *
+     * @var mixed
+     */
     public $prename;
     public $lastname;
     public $age;
     public $datetime;
     public $film;
     public $room;
-
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $prename
+     * @param  mixed $lastname
+     * @param  mixed $age
+     * @param  mixed $datetime
+     * @param  mixed $film
+     * @param  mixed $room
+     * @return void
+     */
     public function __construct($prename, $lastname, $age, $datetime, $film, $room) 
     {
         $this->prename = $prename;
@@ -19,7 +39,12 @@ class Customer
         $this->film = $film;
         $this->room = $room;
     }
-
+    
+    /**
+     * register_customer
+     *
+     * @return void
+     */
     public function register_customer() 
     {
 
@@ -38,7 +63,12 @@ class Customer
         $jsonData = json_encode($tempArray);
         file_put_contents('./data/customers.json', $jsonData);
     }
-
+    
+    /**
+     * create_booking
+     *
+     * @return void
+     */
     public function create_booking() 
     {
 
@@ -92,7 +122,12 @@ class Customer
             }
         }
     }
-
+    
+    /**
+     * show_booked_customers
+     *
+     * @return void
+     */
     public function show_booked_customers()
     {
         $i = 0;
@@ -121,7 +156,12 @@ class Customer
         }
     }
 
-    //shows how many customers are going to watch the same movie at the same time at the same room
+    //shows how many customers are going to watch the same movie at the same time at the same room    
+    /**
+     * same_bookings
+     *
+     * @return void
+     */
     public function same_bookings()
     {
         $same = 0;
@@ -156,7 +196,12 @@ class Customer
         $freeSeats = 80 - $same;
         printf("In der Halle: %d am: %s gibt es insgesamt noch: %d freie Plätze", $room, $datetime, $freeSeats);
     }
-
+    
+    /**
+     * remove_booking
+     *
+     * @return void
+     */
     public function remove_booking()
     {
         $newArray = [];
