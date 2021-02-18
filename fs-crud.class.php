@@ -85,8 +85,8 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
         {
             echo $text . "\n";
         }
-
-    $FSDay = readline("\nUm einen Film-Plan genauer anzuschauen geben Sie die Datum des Film-Plans ein (FS_ '01_01_2000' .json): \n");
+    echo "\n";
+    $FSDay = readline("Um einen Film-Plan genauer anzuschauen geben Sie die Datum des Film-Plans ein (FS_ '01_01_2000' .json): \n");
     $filePath = "./data/FS_" . $FSDay .".json";
     $FSData = file_get_contents($filePath);
     $FSDecode = json_decode($FSData);
@@ -144,6 +144,7 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
                 //if user input matches foreach loop delete this result
                 if ($filmName == $result->{'filmName'} AND $filmDesc == $result->{'filmDesc'} AND $filmDatetime == $result->{'filmDatetime'} AND $cinemaRoom == $result->{'cinemaRoom'} AND $price == $result->{'price'} AND $ageRestriction == $result->{'ageRestriction'})
                 {
+                    echo "Wenn Sie die folgenden Nachricht sehen können, bedeutet dies, dass Sie die Listung gelöscht haben";
                     print_r($result);
                     unset($result);
                     //echo "here ends first vardump";
@@ -175,19 +176,3 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
     {
     } */
 }
-
-// Create a new Film-Schedule for a specific day (NEW: also used to append)
-/*
-
-*/
-
-// Used to choose a Film-Schedule and show it's Specifications
-/*
-
-*/
-
-// Remove an object from a JSON file
-/*
-
-*/
-//add number for deletion and increment it on every foreach loop
