@@ -22,6 +22,7 @@ class Customer
 
     public function register_customer() 
     {
+
         $prename = readline("Geben Sie die Vorname Ihrer Kunde ein: \n");
         $lastname = readline("Geben Sie die Nachname Ihrer Kunde ein: \n");
         $age = readline("Wie alt ist Ihre Kunde: \n");
@@ -156,23 +157,3 @@ class Customer
         printf("In der Halle: %d am: %s gibt es insgesamt noch: %d freie Plätze", $room, $datetime, $freeSeats);
     }
 }
-
-//let user give in room and time and check how many of those exist
-
-// only register user (will later go to administration.php)
-/*
-$register = new Customer("", "", "", "", "", "");
-$register->register_customer();
-*/
-
-//check if customer doesnt already have a booking and then set the film, datetime and room (aka booking)
-
-/*$book = new Customer("", "", "", "", "", "");
-$book->create_booking();*/
-
-
-//use room class to count total seats of room and then substract them by all the customers that have this room on the same time
-
-
-$showCustomer = new Customer("","","","","","");
-$showCustomer->same_bookings();

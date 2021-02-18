@@ -173,25 +173,21 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
 
     /*public function replace_From_FS() 
     {
-        //TODO: show all information that can be each selected for replace -> call upon delete method and then upon append
     } */
 }
 
 // Create a new Film-Schedule for a specific day (NEW: also used to append)
 /*
-$FScreate = new FS_CRUD("", "", "", "", "", "");
-$FScreate->create_FS();
+
 */
 
 // Used to choose a Film-Schedule and show it's Specifications
 /*
-$FSshow = new FS_CRUD("","","","","","");
-$FSshow->show_FS();
+
 */
 
 // Remove an object from a JSON file
 /*
-$FSRemove = new FS_CRUD("","","","","","");
-$FSRemove->remove_From_FS();
+
 */
 //add number for deletion and increment it on every foreach loop
