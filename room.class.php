@@ -1,5 +1,6 @@
 <?php
-
+// For now each room has the exact same amount of seats
+/*
 class Room 
 {
     public $roomName;
@@ -10,4 +11,8 @@ class Room
         $this->roomName = $roomName;
         $this->totalSeats= $totalSeats;
     }
-}
+
+    public function free_seats() {
+
+    }
+} */
