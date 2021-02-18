@@ -3,7 +3,10 @@
 //github repo: https://github.com/dlanaras/cinema
 include_once("./customer.class.php");
 include_once("./fs-crud.class.php");
+$continue = "ja";
 
+while($continue != "nein")
+{
 echo "
 **********************************************
 **********************************************
@@ -13,7 +16,7 @@ echo "
 
 echo "
 __________________________________________
-|1: Kunde registrieren                   |
+|1: Kunde registrieren                   
 |2: Buchung erstellen                    |
 |3: Buchungen auflisten                  |
 |4: Frei Plätze berechnen                |
@@ -65,3 +68,6 @@ break;
 default:
 echo "Bitte geben Sie eine gültige Eingabe ein.";
 }
+$continue = readline("Wollen Sie noch Etwas bearbeiten ('nein' eingeben um das Program zu beenden, sont die Enter-Taste drücken): \n");
+}
+
