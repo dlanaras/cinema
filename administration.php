@@ -39,34 +39,28 @@ break;
 case(3):
     $showCustomer = new Customer("","","","","","");
     $showCustomer->show_booked_customers();
-//instancing -> call show bookings method
 break;
 case(4):
     $freeSeats = new Customer("","","","","","");
     $freeSeats->same_bookings();
-//instancing -> call free seats method
 break;
 case(5):
     $FScreate = new FS_CRUD("", "", "", "", "", "");
     $FScreate->create_FS();
-//instancing -> call create/append method
 break;
 case(6):
     $FSshow = new FS_CRUD("","","","","","");
     $FSshow->show_FS();
-//instancing -> call show method
 break;
 case(7):
     $FSRemove = new FS_CRUD("","","","","","");
     $FSRemove->remove_From_FS();
-//instancing -> call delete method
 break;
 case(8):
     $FSRemove = new FS_CRUD("","","","","","");
     $FSRemove->remove_From_FS();
     $FScreate = new FS_CRUD("", "", "", "", "", "");
     $FScreate->create_FS();
-//instancing -> call delete method -> readlines -> call create/append method
 break;
 default:
 echo "Bitte geben Sie eine gültige Eingabe ein.";
