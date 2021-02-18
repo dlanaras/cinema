@@ -76,7 +76,6 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
     {
         //recomended to open cmd twice one to be able to see the list here and the other to select what to delete and what to replace
 
-        $i = 0;
         $directory = "./data/";
         $texts = glob($directory . "FS_*.json");
         echo "Die folgende Dateien sind die schon existierende Film-Pläne.\n";
@@ -104,9 +103,7 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
             echo "Halle: " . $result->{'cinemaRoom'} . "\n";
             echo "Preis: " . $result->{'price'} . "\n";
             echo "Altersfreigabe: " . $result->{'ageRestriction'} . "\n";
-            echo "Index (Um eine Listung zu löschen gebraucht): " . $i . "\n";
             echo "----------------------------------------------------------\n\n";
-            $i++;
         }
     }
     }
@@ -174,10 +171,10 @@ class FS_CRUD //Film Schedule - Create Remove Update Delete
         }
     }
 
-    public function replace_From_FS() 
+    /*public function replace_From_FS() 
     {
-        //TODO: show all information that can be each selected for replace
-    }
+        //TODO: show all information that can be each selected for replace -> call upon delete method and then upon append
+    } */
 }
 
 // Create a new Film-Schedule for a specific day (NEW: also used to append)
