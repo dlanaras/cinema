@@ -1,5 +1,6 @@
 <?php 
 
+
 class Customer
 {
     public $prename;
@@ -89,17 +90,80 @@ class Customer
                     }
             }
         }
+    }
 
+    public function show_booked_customers()
+    {
+        $i = 0;
+        $oldData = file_get_contents('./data/customers.json');
+        $tempArray = json_decode($oldData);
+
+        foreach($tempArray as $results) 
+        {
+            foreach($results as $result)
+            {
+
+                if (isset($result->{'datetime'}) == true AND isset($result->{'film'}) == true AND isset($result->{'room'}) == true)
+                {
+                $i++;
+                printf("Kunde: %d\n", $i);
+                echo "----------------------------------------------------------\n";
+                echo "Vorname: " . $result->{'prename'} . "\n";
+                echo "Nachname: " . $result->{'lastname'} . "\n";
+                echo "Alter: " . $result->{'age'} . "\n";
+                echo "Zeit/ Datum: " . $result->{'datetime'} . "\n";
+                echo "Film: " . $result->{'film'} . "\n";
+                echo "Halle: " . $result->{'room'} . "\n";
+                echo "----------------------------------------------------------\n\n";
+                }
+            }
+        }
+    }
+
+    //shows how many customers are going to watch the same movie at the same time at the same room
+    public function same_bookings()
+    {
+        $same = 0;
+        
+        $oldData = file_get_contents('./data/customers.json');
+        $tempArray = json_decode($oldData);
+        $room = readline("Wählen Sie eine Halle aus (1-9): \n");
+        $datetime = readline("Wählen sie eine Zeit aus (Format: DD.MM.YYYY:HH:MM:SS): \n");
+
+        foreach($tempArray as $results) 
+        {
+            foreach($results as $subResult)
+            {
+                if (isset($subResult->{'datetime'}) == true AND isset($subResult->{'film'}) == true AND isset($subResult->{'room'}) == true)
+                {
+                    if($room == $subResult->{'room'} AND $datetime == $subResult->{'datetime'})
+                    {
+                        $same++;
+                        printf("Kunde: %d\n", $same);
+                        echo "----------------------------------------------------------\n";
+                        echo "Vorname: " . $subResult->{'prename'} . "\n";
+                        echo "Nachname: " . $subResult->{'lastname'} . "\n";
+                        echo "Alter: " . $subResult->{'age'} . "\n";
+                        echo "Zeit/ Datum: " . $subResult->{'datetime'} . "\n";
+                        echo "Film: " . $subResult->{'film'} . "\n";
+                        echo "Halle: " . $subResult->{'room'} . "\n";
+                        echo "----------------------------------------------------------\n\n";
+                    }
+                }
+            }
+        }
+        $freeSeats = 80 - $same;
+        printf("In der Halle: %d am: %s gibt es insgesamt noch: %d freie Plätze", $room, $datetime, $freeSeats);
     }
 }
 
-
+//let user give in room and time and check how many of those exist
 
 // only register user (will later go to administration.php)
-
-/*$register = new Customer("", "", "", "", "", "");
-$register->register_customer();*/
-
+/*
+$register = new Customer("", "", "", "", "", "");
+$register->register_customer();
+*/
 
 //check if customer doesnt already have a booking and then set the film, datetime and room (aka booking)
 
@@ -108,3 +172,7 @@ $book->create_booking();*/
 
 
 //use room class to count total seats of room and then substract them by all the customers that have this room on the same time
+
+
+$showCustomer = new Customer("","","","","","");
+$showCustomer->same_bookings();
