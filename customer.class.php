@@ -207,7 +207,7 @@ class Customer
         $oldData = file_get_contents('./data/customers.json');
         $tempArray = json_decode($oldData);
         $room = readline("Wählen Sie eine Halle aus (1-9): \n");
-        $datetime = readline("Wählen sie eine Zeit aus (Format: DD.MM.YYYY:HH:MM:SS): \n");
+        $film = readline("Wählen sie eine Zeit aus (Format: DD.MM.YYYY:HH:MM:SS): \n");
 
         foreach($tempArray as $results) 
         {
@@ -215,7 +215,8 @@ class Customer
             {
                 if (isset($subResult->{'datetime'}) == true AND isset($subResult->{'film'}) == true AND isset($subResult->{'room'}) == true)
                 {
-                    if($room == $subResult->{'room'} AND $datetime == $subResult->{'datetime'})
+                    echo "first if works";
+                    if($room == $subResult->{'room'} AND $film == $subResult->{'film'})
                     {
                         $same++;
                         printf("Kunde: %d\n", $same);
@@ -231,8 +232,22 @@ class Customer
                 }
             }
         }
+        
+        $roomData = file_get_contents("./data/rooms.json");
+        $roomArray = json_decode($roomData);
+        foreach($roomArray as $subArray)
+        {
+            foreach($subArray as $result)
+            {
+                if($room == $result->{'roomName'}) 
+                {
+                    $seats = $result->{'seats'};
+                }
+            }
+        }
+
         $freeSeats = 80 - $same;
-        printf("In der Halle: %d am: %s gibt es insgesamt noch: %d freie Plätze", $room, $datetime, $freeSeats);
+        printf("In der Halle: %d am: %s gibt es insgesamt noch: %d freie Plätze\n\n", $room, $datetime, $freeSeats);
     }
     
     /**
