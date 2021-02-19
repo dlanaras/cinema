@@ -297,5 +297,3 @@ class Customer
         }
     }
 }
-
-//TODO: show films alone on a specific film-schedule on booking
