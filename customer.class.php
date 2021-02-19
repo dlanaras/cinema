@@ -71,17 +71,55 @@ class Customer
      */
     public function create_booking() 
     {
+        $directory = "./data/";
+        $texts = glob($directory . "FS_*.json");
+        echo "Die folgende Dateien sind die schon existierende Film-Pläne.\n";
+
+
+        foreach($texts as $text)
+        {
+            echo $text . "\n";
+        }
+
+        echo "\n";
+        $FSDay = readline("Damit die mögliche Filme, die der Kunde anschauen darf, aufgelistet werden können, mussen Sie zuerst den Film-Plan auswählen (FS_ '01_01_2000' .json): \n");
+        $filePath = "./data/FS_" . $FSDay .".json";
+        $FSData = file_get_contents($filePath);
+        $FSDecode = json_decode($FSData);
 
         $prename = readline("Geben Sie die Vorname Ihrer Kunde ein: \n");
         $lastname = readline("Geben Sie die Nachname Ihrer Kunde ein: \n");
         $age = readline("Wie alt ist Ihre Kunde: \n");
-        $datetime = readline("Wann wird Ihre Kunde ein Film schauen kommen (Format: DD.MM.YYYY:HH:MM:SS): \n");
+        echo "\n";
+        //depending on age show available films on this day 
+        foreach($FSDecode as $FSResults)
+        {
+            foreach($FSResults as $FSResult)
+            {
+                if($age >= $FSResult->{'ageRestriction'})
+                {
+                    echo "Film-Name: " . $FSResult->{'filmName'} . ",  Datum/ Zeit: " . $FSResult->{'filmDatetime'} . " und Halle: " . $FSResult->{'cinemaRoom'} . "\n";
+                }
+            }
+        }
+        echo "\n";
+        echo "(Das sind die Filme, wo dieser Kunde an diesem Tag anschauen darf). \n";
         $film = readline("Was für einen Film wird Ihre Kunde anschauen: \n");
-        $room = readline("In welcher Halle wird das Film staat finden: \n");
-        
-        
-        
-        
+        $room = readline("In welcher Halle wird der Film stattfinden: \n");
+
+        // This only works as long as there isnt the same film playing more than once in the same room
+        foreach($FSDecode as $FSResults)
+        {
+            foreach($FSResults as $FSResult)
+            {
+                if($film == $FSResult->{'filmName'} AND $room == $FSResult->{'cinemaRoom'})
+                {
+                    $datetime = $FSResult->{'filmDatetime'};
+                }
+            }
+        }
+        //made this an automatic selection since its quite hard to write and is highly unlikely that the same film will play on the same room twice in a single day / Film-Schedule
+        //$datetime = readline("Wann wird Ihre Kunde ein Film schauen kommen (Format: DD.MM.YYYY:HH:MM:SS): \n");
         $oldData = file_get_contents('./data/customers.json');
         $tempArray = json_decode($oldData);
         rsort($tempArray);
@@ -259,3 +297,5 @@ class Customer
         }
     }
 }
+
+//TODO: show films alone on a specific film-schedule on booking
