@@ -1,16 +1,31 @@
 <?php
 
+/**
+ * Room
+ */
 class Room
 {
     public $roomName;
     public $seats;
-
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $roomName
+     * @param  mixed $seats
+     * @return void
+     */
     public function __construct($roomName, $seats)
     {
         $this->roomName = $roomName;
         $this->seats = $seats;
     }
-
+    
+    /**
+     * first_assign
+     *
+     * @return void
+     */
     private function first_assign()
     {
         $handle = fopen("./data/rooms.json", "a+");
@@ -46,7 +61,6 @@ class Room
             }
         }
     }
-    //let user assign seats
 }
 
 /* should only be used once
